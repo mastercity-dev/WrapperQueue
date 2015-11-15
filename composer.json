@@ -1,0 +1,25 @@
+{
+  "name": "mastercity/mastercity-queue",
+  "description": "Mastercity Queue",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Sysolyatin Dmitrey"
+    }
+  ],
+
+  "require": {
+    "videlalvaro/php-amqplib": "2.6.0"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Mastercity\\Queue\\": "src"
+    }
+  }
+}
