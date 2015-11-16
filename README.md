@@ -57,6 +57,9 @@ $queue = new \Mastercity\Queue\Queue($provider);
 $queue->send("updateAvatar", ['test' => 1], '#');
 
 
+// Если необходимо повысить приоритет сообщения, то в data устанавливаем приоритет в дипазоне [1..10]
+$queue->send('updateTest', ['test' => 1, 'priority' => 4], '#');
+
 // Получить сообщения из очереди
 $message = $queue->get();
 

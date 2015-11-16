@@ -41,13 +41,15 @@ class RabbitProvider implements ProviderInterface
     public function __construct(AMQPStreamConnection $connection, $exchange, $queueId, $debug = false)
     {
         if ($debug === true && !defined("AMQP_DEBUG")) {
-            define("AMQP_DEBUG");
+            define("AMQP_DEBUG", 1);
         }
 
         $this->exchange = $exchange;
         $this->channel = $connection->channel();
         $this->channel->exchange_declare($exchange, "x-rtopic", false, true, false, false);
-        $this->channel->queue_declare($queueId, false, true, false, false);
+        $this->channel->queue_declare($queueId, false, true, false, false, false, ['x-max-priority' => ['I', 10]]);
+        $this->channel->queue_bind($queueId, $this->exchange, $queueId);
+
         $this->channel->basic_consume($queueId, '', false, false, false, false, [$this, 'callbackRabbit']);
 
         $this->queueId = $queueId;
@@ -76,15 +78,23 @@ class RabbitProvider implements ProviderInterface
      */
     public function send($event, $data, $to = "mastercity.#")
     {
+        $priority = 1;
+        if (isset($data['priority'])) {
+            $priority = $data['priority'];
+        }
+
         $data = json_encode([
             'event' => $event,
             'data' => $data,
             'from' => $this->queueId
         ]);
 
+        $msg = new AMQPMessage($data, [
+            'delivery_mode' => 2,
+            'priority' => $priority
+        ]);
 
-        $msg = new AMQPMessage($data);
-        $this->channel->basic_publish($msg, $this->exchange, $to);
+        $this->channel->basic_publish($msg, $this->exchange, $to, true);
     }
 
     /**
@@ -104,15 +114,4 @@ class RabbitProvider implements ProviderInterface
 
         return $message;
     }
-
-
-    /**
-     * @return \Mastercity\Queue\Event\EventRabbit
-     */
-    protected function getMessage()
-    {
-        return $this->nextMessage;
-    }
-
-
 }

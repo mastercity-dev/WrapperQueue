@@ -1,3 +1,7 @@
 .idea
 /vendor
 index.php
+get.php
+send.php
+init.php
+composer.lock
