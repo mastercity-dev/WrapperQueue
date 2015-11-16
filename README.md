@@ -27,6 +27,7 @@
 
 ## Использование ##
 ```php
+<?php
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 include __DIR__."/vendor/autoload.php";
@@ -68,7 +69,8 @@ $message->getData();
 // Откуда было отправлено сообщение
 $message->getFrom();
 
-
+// Если сообщение было успешно обработано, без этого новые данные получены не будут
+$message->success();
 ```
 
 
