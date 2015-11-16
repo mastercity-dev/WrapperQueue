@@ -45,8 +45,6 @@ class EventRabbit extends EventInteface
     }
 
 
-
-
     /**
      * Метод, который будет вызыватся при успешной обработке события
      */

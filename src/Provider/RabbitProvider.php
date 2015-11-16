@@ -95,7 +95,7 @@ class RabbitProvider implements ProviderInterface
     {
         try {
             $this->channel->wait(null, true, 0.1);
-        } catch(AMQPTimeoutException $e) {
+        } catch (AMQPTimeoutException $e) {
             return null;
         }
 

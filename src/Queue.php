@@ -19,7 +19,8 @@ class Queue
      * @param $data - Данные для отправки
      * @param $to - необязательный параметр, который индифицирует куда будет отправлено событие, если очередей много
      */
-    public function send($event, $data, $to = null) {
+    public function send($event, $data, $to = null)
+    {
         $this->provider->send($event, $data, $to);
     }
 
@@ -27,7 +28,8 @@ class Queue
      * Получает новое событие из очереди
      * @return EventInterface
      */
-    public function get() {
+    public function get()
+    {
         return $this->provider->get();
     }
 }
