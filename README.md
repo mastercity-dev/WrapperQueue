@@ -14,7 +14,7 @@
     "repositories": [
         {
           "type": "vcs",
-          "url": "git@github.com:mastercity-dev/mastercity-queue.git"
+          "url": "git@github.com:mastercity-dev/WrapperQueue.git"
         }
       ],
     
