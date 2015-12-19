@@ -1,6 +1,6 @@
 {
-  "name": "mastercity/mastercity-queue",
-  "description": "Mastercity Queue",
+  "name": "mastercity/wrapperqueue",
+  "description": "Wrapper Queue",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [

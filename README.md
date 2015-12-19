@@ -1,4 +1,4 @@
-# Mastercity Queue #
+# Wrapper Queue #
 
 ## Для использование пакета неоходимо установить ##
 
@@ -19,7 +19,7 @@
       ],
     
     "require": {
-        "mastercity/mastercity-queue" : "dev-master"
+        "mastercity/wrapperqueue" : "dev-master"
       }
     ...
 }
@@ -36,10 +36,10 @@ include __DIR__."/vendor/autoload.php";
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 
 // имя точки доступа
-$exchange = "mastercity";
+$exchange = "exchange";
 
 // Индификатор очереди
-$queueId = "mastercity.insert.blog";
+$queueId = "exchange.insert.product";
 
 //Объявляем provider для Queue
 $provider = new \Mastercity\Queue\Provider\RabbitProvider($connection,$exchange, $queueId, false);
@@ -51,8 +51,8 @@ $queue = new \Mastercity\Queue\Queue($provider);
 // event = updateAvatar,
 // data = ['test' => 1],
 // to - # (отправить во все очереди),
-//      mastercity.# - отправить всем очередям с индификатор которых имеет префикс mastercity
-//      mastercity.insert.# - отправить всем очередям с индификатор которых имеет префикс mastercity.insert
+//      exchange.# - отправить всем очередям с индификатор которых имеет префикс exchange
+//      exchange.insert.# - отправить всем очередям с индификатор которых имеет префикс exchange.insert
 
 $queue->send("updateAvatar", ['test' => 1], '#');
 

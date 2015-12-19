@@ -76,7 +76,7 @@ class RabbitProvider implements ProviderInterface
      * @param $data - Данные для отправки
      * @param $to - ('#' - отправить всем очередь)
      */
-    public function send($event, $data, $to = "mastercity.#")
+    public function send($event, $data, $to = "exchange.#")
     {
         $priority = 1;
         if (isset($data['priority'])) {
