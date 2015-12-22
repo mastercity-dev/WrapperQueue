@@ -97,6 +97,11 @@ class RabbitProvider implements ProviderInterface
         $this->channel->basic_publish($msg, $this->exchange, $to, true);
     }
 
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
     /**
      * Получает новое событие из очереди
      * @return EventInterface

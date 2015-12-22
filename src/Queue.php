@@ -32,4 +32,9 @@ class Queue
     {
         return $this->provider->get();
     }
+
+    public function getProvider()
+    {
+        return $this->provider;
+    }
 }
